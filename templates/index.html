@@ -1,4 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>hi</h1>
+  {% for car in cars %}
+    <h1>{{car.name}}</h1>
+    <img src="{{car.image.iurl}}" alt="">
+    <p>{{car.description}}</p>
+    <p>{{car.created_at}}</p>
+  {% endfor %}
 {% endblock content %}

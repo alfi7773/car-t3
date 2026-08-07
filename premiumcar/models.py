@@ -19,7 +19,7 @@ class Car(models.Model):
     name = models.CharField(verbose_name='name', max_length=100)
     short_description = models.TextField(verbose_name='short_description', max_length=500)
     description = models.TextField(verbose_name='description', max_length=800)
-    image = models.ImageField(verbose_name='Image', upload_to='images/')
+    image = models.ImageField(verbose_name='Image', upload_to='media/')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='created at')
     category = models.ForeignKey(Category, verbose_name='Category', on_delete=models.PROTECT)
 
