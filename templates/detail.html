@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ car.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+</head>
+<body>
+
+{% include "companents/nav.html" %}
+
+<div class="container">
+
+    <div class="topnav">
+        <a href="/">Главная</a>
+        <span>/</span>
+        <a href="{% url "catalogue" %}">Автомобили</a>
+        <span>/</span>
+        <p>{{ car.name }}</p>
+    </div>
+
+    <div class="car-detail">
+
+        <div class="left">
+
+            <div class="main-image">
+                <img src="{{ car.image.url }}" alt="{{ car.name }}">
+            </div>
+
+            <div class="gallery">
+
+                <div class="mini">
+                    <img src="{{ car.image.url }}" alt="">
+                </div>
+
+                <div class="mini">
+                    <img src="{{ car.image.url }}" alt="">
+                </div>
+
+                <div class="mini">
+                    <img src="{{ car.image.url }}" alt="">
+                </div>
+
+                <div class="mini">
+                    <img src="{{ car.image.url }}" alt="">
+                </div>
+
+            </div>
+
+            <div class="description">
+
+                <h2>Описание</h2>
+
+                <p>
+                    {{ car.description }}
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="right">
+
+            <div class="card">
+
+                <h1>{{ car.name }}</h1>
+
+                <h2>${{ car.price }}</h2>
+
+                <a href="#" class="btn">
+                    Оставить заявку
+                </a>
+
+                <div class="info">
+
+                    <div class="stroka">
+                        <span>Год выпуска</span>
+                        <p>{{ car.year }}</p>
+                    </div>
+
+                    <div class="stroka">
+                        <span>Пробег</span>
+                        <p>{{ car.probeg }} км</p>
+                    </div>
+
+                    <div class="stroka">
+                        <span>Коробка</span>
+                        <p>{{ car.box }}</p>
+                    </div>
+
+                    <div class="stroka">
+                        <span>Топливо</span>
+                        <p>{{ car.toplivo }}</p>
+                    </div>
+
+                    <div class="stroka">
+                        <span>Двигатель</span>
+                        <p>{{ car.motion }}</p>
+                    </div>
+
+                    <div class="stroka">
+                        <span>Марка</span>
+                        <p>{{ car.name}}</p>
+                    </div>
+
+                    <div class="stroka">
+                        <span>Цвет</span>
+                        <p>{{ car.color }}</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="same">
+
+        <h2>Похожие автомобили</h2>
+
+        <div class="cards">
+
+            {% for item in similar_cars %}
+
+            <div class="item">
+
+                <img src="{{ item.image.url }}" alt="">
+
+                <div class="info2">
+
+                    <h3>{{ item.name }}</h3>
+
+                    <p>{{ item.year }} • {{ item.mileage }} км</p>
+
+                    <h4>${{ item.price }}</h4>
+
+                    <a href="{% url 'car_detail' item.id %}">
+                        Подробнее
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <p>Похожих автомобилей пока нет.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <div class="container footer">
+
+        <div>
+            <h3>Premium CAR</h3>
+            <p>Ваш надежный партнер в выборе автомобиля.</p>
+        </div>
+
+        <div>
+            <h3>Навигация</h3>
+
+            <a href="/">Главная</a>
+            <a href="#">Автомобили</a>
+            <a href="#">Контакты</a>
+        </div>
+
+        <div>
+            <h3>Контакты</h3>
+
+            <p>Кыргызстан</p>
+            <p>+996 555 555 555</p>
+            <p>info@premiumcar.com</p>
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

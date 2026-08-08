@@ -1,9 +1,178 @@
 {% extends "base.html" %}
 {% block content %}
-  {% for car in cars %}
-    <h1>{{car.name}}</h1>
-    <img src="{{car.image.iurl}}" alt="">
-    <p>{{car.description}}</p>
-    <p>{{car.created_at}}</p>
-  {% endfor %}
-{% endblock content %}
+
+<div class="container">
+    <div class="cars">
+
+        {% for car in cars %}
+        <div class="car-card">
+
+            <div class="car-image">
+              <a href="{% url 'detail' car.id %}">
+                <img src="{{ car.image.url }}" alt="{{ car.name }}">
+              </a>
+              
+              <span class="badge">Vehicle</span>
+              
+              <div class="overlay">
+                <p class="date">{{ car.created_at|date:"F d, Y" }}</p>
+                <h2>{{ car.name }}</h2>
+                <p>{{ car.description|truncatewords:8 }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+ <div class="main">
+
+
+        <div class="left">
+
+
+            {% for car in cars %}
+
+            <div class="post">
+
+              <a href="{% url 'detail' car.id %}">
+                <img src="{{ car.image.url }}">
+              </a>
+
+
+                <div class="post_text">
+
+                    <span>
+                        Vehicle
+                    </span>
+
+
+                    <small>
+                        {{ car.created_at|date:"F d, Y" }}
+                    </small>
+
+
+                    <h2>
+                        {{ car.name }}
+                    </h2>
+
+
+                    <p>
+                        {{ car.description|truncatewords:20 }}
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+
+            <div class="pages">
+
+                <a>1</a>
+                <a>2</a>
+                <a>3</a>
+                <a>></a>
+
+            </div>
+            <h2>
+                Most popular
+            </h2>
+
+
+            <div class="bottom">
+                {% for car in cars|slice:":4" %}
+                <div>
+                  <a href="{% url 'detail' car.id %}">
+                    <img src="{{ car.image.url }}">
+                  </a>
+                    <h4>
+                        {{ car.name }}
+                    </h4>
+                    <small>
+                        June 6, 2019
+                    </small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="right">
+          {% for car in cars|slice:":3" %}
+            <div class="author">
+              <a href="{% url 'detail' car.id %}">
+                <img src="{{car.image.url}}">
+              </a>
+                <h3>
+                    {{car.description}}
+                </h3>
+                <p>
+                    {{car.date}}
+                </p>
+                <p>
+                    Hi! I'm Lewis. I write about cars
+                    and news.
+                </p>
+                <button>
+                    Continue Reading
+                </button>
+            </div>
+            <h3>
+                Popular posts
+            </h3>
+            <div class="small">
+              <a href="{% url 'detail' car.id %}">
+                <img src="{{ car.image.url }}">
+              </a>
+                <h4>
+                    {{ car.name }}
+                </h4>
+                <small>
+                    June 6, 2019
+                </small>
+            </div>
+            {% endfor %}
+            <h3>
+                Instagram
+            </h3>
+            <div class="insta">
+                {% for car in cars|slice:":6  " %}
+                <img src="{{ car.image.url }}">
+                {% endfor %}
+            </div>
+            <h3>
+                Tags
+            </h3>
+            <div class="tags">
+                <a>Car</a>
+                <a>BMW</a>
+                <a>Sport</a>
+                <a>Travel</a>
+                <a>Nature</a>
+            </div>
+            <h3>
+                Email newsletter
+            </h3>
+            <input placeholder="Your name">
+            <input placeholder="Your email">
+            <button>
+                Subscribe
+            </button>
+
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

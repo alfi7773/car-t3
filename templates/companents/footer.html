@@ -1,0 +1,73 @@
+<footer>
+    <div class="footer-container">
+        
+        <div class="footer-about">
+            <div class="logo">
+                Premium <span>CAR</span>
+            </div>
+            
+            <p>
+                Short description about the company Lorem ipsum
+                is simply dummy text of the printing and typesetting industry.
+            </p>
+            
+            <h3>Keep in touch</h3>
+            
+            <div class="social">
+                <a href="">f</a>
+                <a href="">t</a>
+                <a href="">p</a>
+                <a href="">G+</a>
+                <a href="">◎</a>
+            </div>
+        </div>
+        
+        
+        <div class="footer-posts">
+            <h3>Recent posts</h3>
+            
+            {% for car in cars|slice:":3" %}
+            <div class="post2">
+                <img src="{{car.image.url}}">
+                <div>
+                    <h4>{{car.name}}</h4>
+                    <p>{{car.description}}</p>
+                </div>
+            </div>
+            
+            {% endfor %}
+            
+        </div>
+
+
+        <div class="newsletter">
+            <h3>Newsletter</h3>
+            
+            <input type="text" placeholder="Your name">
+            <input type="email" placeholder="Your email address">
+            
+            <button>
+                Subscribe to newsletter
+            </button>
+        </div>
+        
+    </div>
+    
+    
+    <div class="footer-bottom">
+
+        <p>
+            ©2019 Logwork. All Right Reserved.
+        </p>
+
+        <div class="links">
+            <a href="#">Home</a>
+            <a href="#">Recipes</a>
+            <a href="#">Article</a>
+            <a href="#">Contact</a>
+            <a href="#">Purchase</a>
+        </div>
+
+    </div>
+
+</footer>

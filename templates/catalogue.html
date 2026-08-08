@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue</title>
+    <link rel="stylesheet" href="/static/css/catalogue.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    {% include "companents/nav.html" %}
+
+    <h1 class="title">Каталог автомобилей</h1>
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            <h2>Фильтры</h2>
+
+            <form method="get">
+                <input type="text" name="search" placeholder="Поиск" value="{{ request.GET.search }}">
+
+                <select name="brand">
+                    <option value="">Все марки</option>
+                    <option value="Audi" {% if request.GET.brand == 'Audi' %}selected{% endif %}>Audi</option>
+                    <option value="BMW" {% if request.GET.brand == 'BMW' %}selected{% endif %}>BMW</option>
+                    <option value="Mercedes" {% if request.GET.brand == 'Mercedes' %}selected{% endif %}>Mercedes</option>
+                </select>
+
+                <select name="year">
+                    <option value="">Любой год</option>
+                    <option value="2024" {% if request.GET.year == '2024' %}selected{% endif %}>2024</option>
+                    <option value="2023" {% if request.GET.year == '2023' %}selected{% endif %}>2023</option>
+                    <option value="2022" {% if request.GET.year == '2022' %}selected{% endif %}>2022</option>
+                </select>
+
+                <button type="submit">Найти</button>
+            </form>
+
+        </div>
+
+        <div class="catalog">
+
+            {% for car in cars %}
+
+            <div class="card">
+
+                <img src="{{ car.image.url }}" alt="">
+
+                <h3>{{ car.name }}</h3>
+
+                <p>{{ car.description|truncatewords:10 }}</p>
+
+                <p>{{ car.created_at }}</p>
+
+                <a href="{% url 'detail' car.id %}" class="btn">Подробнее</a>
+
+            </div>
+
+            {% empty %}
+
+            <p class="empty">Автомобилей не найдено</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+  
+
+        <div class="pagination">
+            {% for num in cars.paginator.page_range %}
+                {% if cars.number == num %}
+                    <a class="active" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.brand %}&brand={{ request.GET.brand }}{% endif %}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}">{{ num }}</a>
+                {% else %}
+                    <a href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.brand %}&brand={{ request.GET.brand }}{% endif %}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
