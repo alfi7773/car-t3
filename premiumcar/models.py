@@ -8,7 +8,7 @@ class Category(models.Model):
 
     title = models.CharField(verbose_name='name', max_length=100)
 
-    def _str_(self):
+    def __str__(self):
         return self.title
 
 class Car(models.Model):
